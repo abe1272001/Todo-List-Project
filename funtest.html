@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForFun</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./icons/weIcon.svg" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <style>
+    * {
+      border: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      background-color: rgb(232, 255, 127);
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      background-color: rgb(232, 255, 127);
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .flower {
+      width: 3rem;
+      height: 3rem;
+      background-image: url(./icons/rick.gif);
+      /* background-color: aquamarine; */
+    }
+
+    h1 {
+      font-size: 3rem;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      cursor: pointer;
+      transition: color 0.5s ease;
+      z-index: 100000;
+      font-family: "Noto Serif", serif;
+    }
+
+    h1:hover {
+      color: violet;
+    }
+
+    button {
+      position: absolute;
+      padding: 1rem;
+      min-height: 4rem;
+      min-width: 4rem;
+      z-index: 10000;
+      cursor: pointer;
+      display: none;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      /* position: absolute; */
+      /* top: 0; */
+      /* left: 0; */
+      animation: moving 4s ease forwards;
+    }
+
+    .fall {
+      transform: translateY(8rem) rotateZ(20deg);
+      /* opacity: 0; */
+    }
+
+    .rick {
+      /* transition: moving 2 ease; */
+      transition: 1s ease-out;
+    }
+
+    @keyframes moving {
+      0% {
+        transform: scale(1, 1);
+        visibility: visible;
+        /* max-height: 0; */
+        /* transform: translateY(8rem) rotateZ(20deg); */
+      }
+      50% {
+        transform: scale(4, 4) rotateZ(-20deg) translateY(-2rem);
+        /* transform: rotateZ(-20deg); */
+      }
+      100% {
+        transform: scale(2, 2) rotateZ(0deg);
+        visibility: hidden;
+        /* transform: translateY(8rem) rotateZ(20deg); */
+        /* max-height: 500px; */
+        /* display: none; */
+      }
+    }
+
+    @keyframes moving2 {
+      0% {
+        transform: scale(1, 1);
+        /* transform: translateY(8rem) rotateZ(20deg);  */
+        background-color: rgb(232, 255, 127);
+      }
+      100% {
+        transform: scale(4, 4) rotateZ(-10deg);
+        /* transform: rotateZ(-20deg); */
+        background-color: skyblue;
+        display: none;
+      }
+    }
+  </style>
+
+  <body>
+    <h1>Get More Rick</h1>
+    <button id="stop"><h1>Stop!</h1></button>
+    <div class="container">
+      <!-- <div class="flower">
+            <img src="./icons/rick.gif" alt="" />
+      </div> -->
+    </div>
+
+    <script>
+      const button = document.querySelector("button");
+      const myName = document.querySelector("h1");
+      const container = document.querySelector(".container");
+      console.log(container);
+      console.log(button);
+
+      function getRandomBetween(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      //html
+      function createDiv() {
+        let div = document.createElement("div");
+        let img = document.createElement("img");
+        div.appendChild(img);
+        img.src = "./icons/rick.gif";
+        div.style.position = "absolute";
+        // console.log(img.style.transition);
+        div.classList.add("rick");
+        let x = getRandomBetween(1, 100);
+        let y = getRandomBetween(1, 100);
+        div.style.left = `${x}vw`;
+        div.style.top = `${y}vh`;
+        container.appendChild(div);
+      }
+
+      let pop;
+      myName.addEventListener("click", function () {
+        pop = setInterval(createDiv, 200);
+        button.style.display = "flex";
+      });
+
+      button.addEventListener("click", function (e) {
+        window.clearInterval(pop);
+        button.style.display = "none";
+        let divs = document.querySelectorAll(".container div");
+        let containerLen = container.children.length;
+
+        // console.log(divs[0]);
+
+        let lastDiv = divs[containerLen - 1];
+        console.log(lastDiv);
+
+        // document.body.innerHTML = "";
+        // //     <h1>Get More Rick</h1>
+        // // <button><h1>Stop!</h1></button>
+        // //new h1
+        // let newH1 = document.createElement("h1");
+        // newH1.innerHTML = "Get More Rick";
+        // //new button
+        // let newBtn = document.createElement("button");
+        // let newH2 = document.createElement("h1");
+        // newH2.innerHTML = "Stop!";
+        // newBtn.appendChild(newH2);
+
+        // document.body.appendChild(newH1);
+        // document.body.appendChild(newBtn);
+
+        //!怪怪的
+        container.addEventListener("transitionend", function () {
+          // document.body.innerHTML = "";
+          container.innerHTML = "";
+          console.log(container);
+        });
+      });
+
+      //jQuery
+      // $("document").ready(function () {
+      //   $("#stop").on("click", function () {
+      //     $(".rick").remove();
+      //   });
+      // });
+
+      // IIFE 立刻呼叫執行的表達式 只會運行指定次數
+      // for (let i = 0; i < 10; i++) {
+      //   // setInterval(creatDiv, 200);
+      //   (function (x) {
+      //     setTimeout(creatDiv, 2000);
+      //   })(i);
+
+      //   // creatDiv();
+      // }
+    </script>
+  </body>
+</html>

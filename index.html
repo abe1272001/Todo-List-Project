@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Poppins:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="icon" href="icons/weFun.svg" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="fun">
+      <img src="./icons/rick.gif" alt="" />
+      <!-- onclick="playAudio('./plus.wav')" -->
+    </div>
+    <!-- ./plus.wav -->
+    <header>
+      <a href="./funtest.html" target="_blank"><h1>Abe's Todo List</h1></a>
+    </header>
+
+    <div class="big-container">
+      <div class="weather-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="app-title">
+          <h1>Weather</h1>
+        </div>
+        <div class="notification"></div>
+        <div class="weather-info-container">
+          <div class="weather-icon" data-aos="fade-right" data-aos-delay="300">
+            <img src="icons/unknown.png" alt="" />
+          </div>
+          <div class="temperature-value">
+            <p>- °<span>C</span></p>
+          </div>
+          <div class="temperature-description">
+            <p>-</p>
+          </div>
+          <div class="location">
+            <p>-</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="todoList-container" data-aos="fade-up" data-aos-delay="300">
+        <form>
+          <!-- #todo-input-container -->
+          <div id="todo-input-container">
+            <input type="text" class="todo-input" />
+            <button class="todo-button" type="Submit">
+              <i class="fas fa-plus-square"></i>
+            </button>
+          </div>
+
+          <!-- .Select -->
+          <div class="select-container">
+            <div class="select">
+              <!-- !onchange觀念!! -->
+              <select
+                name="todos"
+                class="filter-todo"
+                onchange="filterTodo(event)"
+              >
+                <option value="all" selected="selected">全部</option>
+                <option value="completed">已完成</option>
+                <option value="uncompleted">未完成</option>
+              </select>
+            </div>
+            <div class="select-icon">
+              <i class="fas fa-caret-down"></i>
+            </div>
+          </div>
+        </form>
+        <div class="todo-container">
+          <ul class="todo-list"></ul>
+        </div>
+      </div>
+      <div class="calender-container" data-aos="fade-up" data-aos-delay="400">
+        <div class="time-container">
+          <div id="clock"></div>
+          <div id="date"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer><small>Abe Chen &copy; 2020</small></footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
